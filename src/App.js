@@ -1,10 +1,12 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import React from "react";
+import CanvasFrame from "./components/Canvas/Canvas"
+import { UseCanvas } from "./components/Canvas";
 function App() {
   return (
     <div className="App">
-      <h1>Daily Diary</h1>
+      <CanvasFrame/>
+      <UseCanvas/>
     </div>
   );
 }
