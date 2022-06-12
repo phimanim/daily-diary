@@ -1,13 +1,11 @@
 import "./App.css";
 import React from "react";
-import CanvasFrame from "./components/Canvas/Canvas"
-import { UseCanvas } from "./components/Canvas";
+import TextEditor from "./components/Text/TextEditor";
 
 function App() {
   return (
     <div className="App">
-      <CanvasFrame/>
-      <UseCanvas/>
+      <TextEditor/>
     </div>
   );
 }

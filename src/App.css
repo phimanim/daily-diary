@@ -6,5 +6,7 @@
    
 .App {
   margin: 30px;
+  border: 1px solid #909;
+padding: 30px;
 }
  
