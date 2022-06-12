@@ -1,5 +1,12 @@
-import React from "react";
-import { Editor, EditorState, RichUtils, Modifier } from "draft-js";
+import React, { useEffect } from "react";
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  Modifier,
+  convertToRaw,
+  convertFromRaw,
+} from "draft-js";
 import {
   BlockTypeControls,
   InlineStyleControls,
@@ -23,7 +30,30 @@ export default function TextEditor() {
     setEditorState(nextState);
   };
 
-  const onChange = (editorState) => setEditorState(editorState);
+  const saveContent = (content) => {
+    window.localStorage.setItem(
+      "content",
+      JSON.stringify(convertToRaw(content))
+    );
+  };
+
+  const onChange = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    saveContent(contentState);
+    setEditorState(editorState);
+  };
+  useEffect(() => {
+    const content = window.localStorage.getItem("content");
+
+    if (content) {
+      setEditorState(
+        EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
+      );
+    } else {
+      setEditorState(EditorState.createEmpty());
+    }
+  }, []);
+
   const toggleColor = (toggledColor) => toggleColorControls(toggledColor);
 
   function toggleColorControls(toggledColor) {
@@ -66,7 +96,10 @@ export default function TextEditor() {
     <>
       <div style={{ paddingBottom: "10px" }}>
         <BlockTypeControls onToggle={onBlockClick} />
-        <InlineStyleControls editorState={editorState} onToggle={onInlineClick} />
+        <InlineStyleControls
+          editorState={editorState}
+          onToggle={onInlineClick}
+        />
         <ColorControls editorState={editorState} onToggle={toggleColor} />
       </div>
       <div className="TextEditor">
