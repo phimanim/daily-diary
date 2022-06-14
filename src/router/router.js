@@ -4,6 +4,7 @@ import { Auth } from "../pages";
 import { PrivateRoute, GuestRoute } from ".";
 import TextEditor from "../components/Text/TextEditor";
 import { Profile } from "../pages";
+import { Dailys } from "../pages/DailyPages";
 
 function AppRouter() {
   return (
@@ -20,6 +21,9 @@ function AppRouter() {
       </PrivateRoute>
       <PrivateRoute path="/new-daily" exact>
         <TextEditor/>
+      </PrivateRoute>
+      <PrivateRoute path="/dailys" exact>
+        <Dailys/>
       </PrivateRoute>
     </Switch>
   );
