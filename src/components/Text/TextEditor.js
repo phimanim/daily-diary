@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Editor,
   EditorState,
@@ -19,6 +20,8 @@ export default function TextEditor() {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
+  console.log("state editor", editorState);
+  const history = useHistory();
 
   const onInlineClick = (e) => {
     let nextState = RichUtils.toggleInlineStyle(editorState, e);
@@ -97,21 +100,26 @@ export default function TextEditor() {
   const newHandleSubmit = async (event) => {
     event.preventDefault();
     const contentRaw = convertToRaw(editorState.getCurrentContent());
+    console.log("raw content", contentRaw);
     const newDaily = {
       message: JSON.stringify(contentRaw),
     };
+    console.log("new daily", newDaily);
     try {
       const { data } = await createDaily({
         ...newDaily,
       });
       console.log("data", data);
+      history.push("/profile");
     } catch (err) {
       console.log(await err.response);
     }
   };
 
   return (
-    <div style={{ display: "flex", flexDirection:"column", alignItems:"center" }}>
+    <div
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <div style={{ paddingBottom: "10px" }}>
         <BlockTypeControls onToggle={onBlockClick} />
         <InlineStyleControls
@@ -127,7 +135,12 @@ export default function TextEditor() {
           onChange={onChange}
         />
       </div>
-      <button style={{ width:"100px",padding: "5px", margin:"10px" }} onClick={newHandleSubmit}>Save</button>
+      <button
+        style={{ width: "100px", padding: "5px", margin: "10px" }}
+        onClick={newHandleSubmit}
+      >
+        Save
+      </button>
     </div>
   );
 }
