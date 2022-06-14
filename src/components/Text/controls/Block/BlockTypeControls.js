@@ -1,4 +1,4 @@
-import StyleButton from "./StyleButton";
+import StyleButton from "../StyleButton";
 import BlockTypes from "./BlockTypes";
 
 const BlockTypeControls = (props) => {

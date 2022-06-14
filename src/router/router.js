@@ -1,11 +1,9 @@
-import {React} from "react";
+import { React } from "react";
 import { Switch } from "react-router-dom";
 import { Auth } from "../pages";
-// Daily
-import { Daily, NewDaily, DailyUpdate } from "../pages/DailyPages";
-// Bookings
-import { Profile, Month, Year, Week } from "../pages";
-import { AppRoute, GuestRoute } from ".";
+import { PrivateRoute, GuestRoute } from ".";
+import TextEditor from "../components/Text/TextEditor";
+import { Profile } from "../pages";
 
 function AppRouter() {
   return (
@@ -16,33 +14,13 @@ function AppRouter() {
       <GuestRoute path="/signup" exact>
         <Auth />
       </GuestRoute>
-
       
-      {/* 
-      <AppRoute exact path="/profile">
+      <PrivateRoute path="/profile" exact>
         <Profile/>
-      </AppRoute>
-
-      <AppRoute exact path="/new-daily">
-        <NewDaily/>
-      </AppRoute>
-      <AppRoute exact path="/daily">
-        <Daily />
-      </AppRoute>
-      <AppRoute exact path="/week:id/:dailyId">
-        <DailyUpdate />
-      </AppRoute>
-
-      <AppRoute exact path="/month:id">
-        <Month />
-      </AppRoute>
-      <AppRoute exact path="/week:id">
-        <Week />
-      </AppRoute>
-      <AppRoute exact path="/year:id">
-        <Year />
-      </AppRoute>
-       */}
+      </PrivateRoute>
+      <PrivateRoute path="/new-daily" exact>
+        <TextEditor/>
+      </PrivateRoute>
     </Switch>
   );
 }

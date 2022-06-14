@@ -1,4 +1,4 @@
-import StyleButton from "./StyleButton";
+import StyleButton from "../StyleButton";
 import InlineStyles from "./InlineStyles";
 
 const InlineStyleControls = (props) => {

@@ -1,4 +1,4 @@
-import InlineStyleMap from "./InlineStyleMap";
+import InlineStyleMap from "./Inline/InlineStyleMap";
 
 const styles = {
   styleButton: {

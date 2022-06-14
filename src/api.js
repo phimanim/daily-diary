@@ -20,24 +20,21 @@ export function logout() {
 export function isLoggedIn() {
   return api.get("/login");
 }
-// museums
-export function getMuseums() {
-  return api.get("/museums");
+// Daily
+export function getDailys() {
+  return api.get("/dailys");
 }
-export function getMuseumById(museumId) {
-  return api.get(`/museums/${museumId}`);
+export function getDailyById(dailyId) {
+  return api.get(`/dailys/${dailyId}`);
 }
-export function createMuseum(museum) {
-  return api.post("/museums", museum);
+export function createDaily(daily) {
+  return api.post("/dailys", daily);
 }
-export function updateMuseum(museumId, museum) {
-  return api.put(`/museums/${museumId}`, museum);
+export function updateDaily(dailyId, daily) {
+  return api.put(`/dailys/${dailyId}`, daily);
 }
-export function deleteMuseum(museumId, museum) {
-  return api.delete(`/museums/${museumId}`, museum);
-}
-export function addExhibitions(museumId) {
-  return api.get(`/museums/exhibitions/${museumId}`);
+export function deleteDaily(dailyId, daily) {
+  return api.delete(`/dailys/${dailyId}`, daily);
 }
 
 //files

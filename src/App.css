@@ -1,12 +1,12 @@
-/* body {
-  background-color: #faf0e6;
-} */
-
-
-   
 .App {
-  margin: 30px;
-  border: 1px solid #909;
-padding: 30px;
+    text-align: center;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
 }
- 
+
+Link {
+text-decoration: none;
+}

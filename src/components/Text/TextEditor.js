@@ -7,12 +7,12 @@ import {
   convertToRaw,
   convertFromRaw,
 } from "draft-js";
-import {
-  BlockTypeControls,
-  InlineStyleControls,
-  ColorControls,
-  ColorStyleMap,
-} from "./controls";
+import { createDaily } from "../../api";
+import ColorStyleMap from "./controls/Color/ColorStyleMap";
+import ColorControls from "./controls/Color/ColorControls";
+import InlineStyleControls from "./controls/Inline/InlineStyleControls";
+import BlockTypeControls from "./controls/Block/BlockTypeControls";
+
 import "./TextEditor.css";
 
 export default function TextEditor() {
@@ -30,33 +30,10 @@ export default function TextEditor() {
     setEditorState(nextState);
   };
 
-  const saveContent = (content) => {
-    window.localStorage.setItem(
-      "content",
-      JSON.stringify(convertToRaw(content))
-    );
-  };
+  const toggleColor = (toggledColor) =>
+    ToggleColorControls(toggledColor, editorState);
 
-  const onChange = (editorState) => {
-    const contentState = editorState.getCurrentContent();
-    saveContent(contentState);
-    setEditorState(editorState);
-  };
-  useEffect(() => {
-    const content = window.localStorage.getItem("content");
-
-    if (content) {
-      setEditorState(
-        EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
-      );
-    } else {
-      setEditorState(EditorState.createEmpty());
-    }
-  }, []);
-
-  const toggleColor = (toggledColor) => toggleColorControls(toggledColor);
-
-  function toggleColorControls(toggledColor) {
+  function ToggleColorControls(toggledColor) {
     const selection = editorState.getSelection();
 
     // Let's just allow one color at a time. Turn off all active colors.
@@ -92,8 +69,49 @@ export default function TextEditor() {
     setEditorState(nextEditorState);
   }
 
+  const saveContent = (content) => {
+    window.localStorage.setItem(
+      "content",
+      JSON.stringify(convertToRaw(content))
+    );
+  };
+
+  const onChange = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    saveContent(contentState);
+    setEditorState(editorState);
+  };
+
+  useEffect(() => {
+    const content = window.localStorage.getItem("content");
+
+    if (content) {
+      setEditorState(
+        EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
+      );
+    } else {
+      setEditorState(EditorState.createEmpty());
+    }
+  }, []);
+
+  const newHandleSubmit = async (event) => {
+    event.preventDefault();
+    const contentRaw = convertToRaw(editorState.getCurrentContent());
+    const newDaily = {
+      message: JSON.stringify(contentRaw),
+    };
+    try {
+      const { data } = await createDaily({
+        ...newDaily,
+      });
+      console.log("data", data);
+    } catch (err) {
+      console.log(await err.response);
+    }
+  };
+
   return (
-    <>
+    <div style={{ display: "flex", flexDirection:"column", alignItems:"center" }}>
       <div style={{ paddingBottom: "10px" }}>
         <BlockTypeControls onToggle={onBlockClick} />
         <InlineStyleControls
@@ -109,6 +127,7 @@ export default function TextEditor() {
           onChange={onChange}
         />
       </div>
-    </>
+      <button style={{ width:"100px",padding: "5px", margin:"10px" }} onClick={newHandleSubmit}>Save</button>
+    </div>
   );
 }

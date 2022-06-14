@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useAuth } from "../components/AuthContext";
+import {useAuth} from "../components/AuthContext";
 
-function AppRoute({ children, ...restProps }) {
+function PrivateRoute({ children, ...restProps }) {
   const { user } = useAuth();
-
+  console.log('PrivateRoute currentUser = ', user)
   if (!user) {
     return <Redirect to="/login" />;
   }
@@ -12,4 +12,4 @@ function AppRoute({ children, ...restProps }) {
   return <Route {...restProps}>{children}</Route>;
 }
 
-export default AppRoute;
+export default PrivateRoute;

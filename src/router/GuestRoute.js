@@ -6,8 +6,7 @@ function GuestRoute({ children, ...restProps }) {
   const { user } = useAuth();
 
   if (user) {
-    return <Redirect to="/week" />;
-    //seems good here to redirect to current week:id
+    return <Redirect to="/home" />;
   }
 
   return <Route {...restProps}>{children}</Route>;

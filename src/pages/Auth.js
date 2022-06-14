@@ -13,22 +13,25 @@ function AuthForm({ onSubmit, submitMessage }) {
     onSubmit(state);
   };
   return (
-    <div className="AuthForm"    >
+    <div className="AuthForm" >
       <form
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit} 
       >
         <div>
           <label htmlFor="email">Email</label>
+          <br/>
           <input
             required
             name="email"
             type="email"
             value={state.email}
             onChange={handleChange}
+            style={{padding:"5px", margin:"10px"}} 
           />
         </div>
         <div>
           <label htmlFor="password">Password</label>
+          <br/>
           <input
             required
             name="password"
@@ -36,10 +39,11 @@ function AuthForm({ onSubmit, submitMessage }) {
             autoComplete="on"
             value={state.password}
             onChange={handleChange}
+            style={{padding:"5px", margin:"10px"}} 
           />
         </div>
 
-        <button type="submit">{submitMessage}</button>
+        <button style={{width:"110px", padding:"5px", margin:"10px"}} type="submit">{submitMessage}</button>
       </form>
     </div>
   );
@@ -49,7 +53,7 @@ function Auth({ isLogin }) {
   const { handleLogin, handleSignup } = useAuth();
   const onSubmit = isLogin ? handleLogin : handleSignup;
   const submitMessage = isLogin ? "Login" : "Signup";
-
+console.log("on submit",onSubmit)
   return (
     <div>
       <AuthForm submitMessage={submitMessage} onSubmit={onSubmit} />

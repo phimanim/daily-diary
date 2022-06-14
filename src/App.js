@@ -1,11 +1,12 @@
 import "./App.css";
-import React from "react";
-import TextEditor from "./components/Text/TextEditor";
+import Navbar from "./components/Navbar";
+import { AppRouter } from "./router";
 
 function App() {
   return (
     <div className="App">
-      <TextEditor/>
+      <Navbar />
+      <AppRouter />
     </div>
   );
 }
