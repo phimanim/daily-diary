@@ -23,7 +23,6 @@ const NavbarLink = styled(Link)`
 `;
 export default function Navbar() {
   const { user, handleLogout } = useAuth();
-  console.log("user", user);
 
   if (user) {
     return (

@@ -10,19 +10,19 @@ import {
 } from "draft-js";
 import { createDaily } from "../../api";
 import ColorStyleMap from "./controls/Color/ColorStyleMap";
-import ColorControls from "./controls/Color/ColorControls";
-import InlineStyleControls from "./controls/Inline/InlineStyleControls";
 import BlockTypeControls from "./controls/Block/BlockTypeControls";
+import InlineStyleControls from "./controls/Inline/InlineStyleControls";
+import ColorControls from "./controls/Color/ColorControls";
 
 import "./TextEditor.css";
 
 export default function TextEditor() {
+
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
-  console.log("state editor", editorState);
   const history = useHistory();
-
+  
   const onInlineClick = (e) => {
     let nextState = RichUtils.toggleInlineStyle(editorState, e);
     setEditorState(nextState);
@@ -71,7 +71,6 @@ export default function TextEditor() {
     }
     setEditorState(nextEditorState);
   }
-
   const saveContent = (content) => {
     window.localStorage.setItem(
       "content",
@@ -100,16 +99,13 @@ export default function TextEditor() {
   const newHandleSubmit = async (event) => {
     event.preventDefault();
     const contentRaw = convertToRaw(editorState.getCurrentContent());
-    console.log("raw content", contentRaw);
     const newDaily = {
       message: JSON.stringify(contentRaw),
     };
-    console.log("new daily", newDaily);
     try {
       const { data } = await createDaily({
         ...newDaily,
       });
-      console.log("data", data);
       history.push("/profile");
     } catch (err) {
       console.log(await err.response);

@@ -53,7 +53,6 @@ function Auth({ isLogin }) {
   const { handleLogin, handleSignup } = useAuth();
   const onSubmit = isLogin ? handleLogin : handleSignup;
   const submitMessage = isLogin ? "Login" : "Signup";
-console.log("on submit",onSubmit)
   return (
     <div>
       <AuthForm submitMessage={submitMessage} onSubmit={onSubmit} />

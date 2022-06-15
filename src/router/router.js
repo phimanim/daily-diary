@@ -25,6 +25,7 @@ function AppRouter() {
       <PrivateRoute path="/dailys" exact>
         <Dailys/>
       </PrivateRoute>
+     
     </Switch>
   );
 }
