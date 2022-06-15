@@ -2,13 +2,13 @@ import InlineStyleMap from "./Inline/InlineStyleMap";
 
 const styles = {
   styleButton: {
-    border: "1px solid black",
+    border: "none",
     background: " transparent",
     padding: "3px",
     margin: "3px",
   },
   styleActiveButton:{
-    background: "grey",
+    color: "grey",
   }
 };
 

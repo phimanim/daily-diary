@@ -1,11 +1,13 @@
+let bullet = '◉'
+
 const ColorTypes = [
-    {label: 'Red', style: 'red'},
-    {label: 'Orange', style: 'orange'},
-    {label: 'Yellow', style: 'yellow'},
-    {label: 'Green', style: 'green'},
-    {label: 'Blue', style: 'blue'},
-    {label: 'Indigo', style: 'indigo'},
-    {label: 'Violet', style: 'violet'},
+    {label: bullet, style: 'red'},
+    {label: bullet, style: 'orange'},
+    {label: bullet, style: 'yellow'},
+    {label: bullet, style: 'green'},
+    {label: bullet, style: 'blue'},
+    {label: bullet, style: 'indigo'},
+    {label: bullet, style: 'violet'},
   ];
 
   export default ColorTypes;

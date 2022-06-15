@@ -6,14 +6,12 @@ import {
   RichUtils,
   Modifier,
   convertToRaw,
-  convertFromRaw,
 } from "draft-js";
 import { createDaily } from "../../api";
 import ColorStyleMap from "./controls/Color/ColorStyleMap";
 import BlockTypeControls from "./controls/Block/BlockTypeControls";
 import InlineStyleControls from "./controls/Inline/InlineStyleControls";
 import ColorControls from "./controls/Color/ColorControls";
-
 import "./TextEditor.css";
 
 export default function TextEditor() {
@@ -84,17 +82,16 @@ export default function TextEditor() {
     setEditorState(editorState);
   };
 
-  useEffect(() => {
-    const content = window.localStorage.getItem("content");
-
-    if (content) {
-      setEditorState(
-        EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
-      );
-    } else {
-      setEditorState(EditorState.createEmpty());
-    }
-  }, []);
+  // useEffect(() => {
+  //   const content = window.localStorage.getItem("content");
+  //   if (content) {
+  //     setEditorState(
+  //       EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
+  //     );
+  //   } else {
+  //     setEditorState(EditorState.createEmpty());
+  //   }
+  // }, []);
 
   const newHandleSubmit = async (event) => {
     event.preventDefault();
@@ -113,10 +110,9 @@ export default function TextEditor() {
   };
 
   return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    <div className="TextEditorContainer"
     >
-      <div style={{ paddingBottom: "10px" }}>
+      <div className="Toggles">
         <BlockTypeControls onToggle={onBlockClick} />
         <InlineStyleControls
           editorState={editorState}
@@ -124,15 +120,14 @@ export default function TextEditor() {
         />
         <ColorControls editorState={editorState} onToggle={toggleColor} />
       </div>
-      <div className="TextEditor">
+      <div className="TextEditor TypingText">
         <Editor
           editorState={editorState}
           customStyleMap={ColorStyleMap}
           onChange={onChange}
         />
       </div>
-      <button
-        style={{ width: "100px", padding: "5px", margin: "10px" }}
+      <button className="SaveButton"
         onClick={newHandleSubmit}
       >
         Save

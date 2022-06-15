@@ -2,11 +2,14 @@ import ColorStyleMap from "./ColorStyleMap";
 
 const styles = {
   styleButton: {
-    border: "1px solid black",
+    border: "none",
     background: " transparent",
     padding: "3px",
     margin: "3px",
   },
+  styleActiveButton:{
+    fontWeight: "bold",
+  }
 };
 
 const ColorButton = (props) => {
@@ -16,11 +19,12 @@ const ColorButton = (props) => {
   };
 
   let style;
+  let styled = { ...styles.styleButton, ...ColorStyleMap[props.style] };
   // if color button is toggled, it will take the color
   if (props.active) {
-    style = { ...ColorStyleMap[props.style] };
+    style = { ...styled, ...styles.styleActiveButton  };
   } else {
-    style = styles.styleButton;
+    style = styled;
   }
 
   return (
