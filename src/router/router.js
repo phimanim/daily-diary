@@ -4,7 +4,7 @@ import { Auth } from "../pages";
 import { PrivateRoute, GuestRoute } from ".";
 import TextEditor from "../components/Text/TextEditor";
 import { Profile } from "../pages";
-import { Dailys, Daily, DailyUpdate } from "../pages/DailyPages";
+import { Dailys, Daily } from "../pages/DailyPages";
 import RichEditor from "../components/Text/RichEditor";
 function AppRouter() {
   return (

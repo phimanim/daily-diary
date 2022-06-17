@@ -1,13 +1,15 @@
+import { useState, useEffect } from "react";
 import { useParams, useHistory, Link } from "react-router-dom";
 import { getDailyById, deleteDaily } from "../../api";
 import { Editor, EditorState, convertFromRaw } from "draft-js";
-import { useState, useEffect } from "react";
+import ColorStyleMap from "../../components/Text/controls/Color/ColorStyleMap";
 import "../../components/Text/TextEditor.css";
 function Daily() {
   const { dailyId } = useParams();
 
   const [dailyData, setDailyData] = useState(null);
   const [message, setMessage] = useState(EditorState.createEmpty());
+  const [dayName, setdayName] = useState(null);
 
   async function getDailyData() {
     const { data } = await getDailyById(dailyId);
@@ -15,6 +17,7 @@ function Daily() {
     const contentState = convertFromRaw(JSON.parse(data.message));
     const editorState = EditorState.createWithContent(contentState);
     setMessage(editorState);
+    setdayName((new Date(data.createdAt)))
   }
 
   useEffect(() => {
@@ -28,14 +31,14 @@ function Daily() {
     deleteDaily(dailyId);
     history.push("/dailys");
   };
-
+  
   return (
     <div className="Daily" style={{display:"flex",flexDirection:"column", alignItems:"center"}}>
-      <h2 className="DailyDate"  style={{padding:"0", margin:"0"}}>Daily {dailyData?.createdAt.slice(0,10)}</h2>
-      <p ></p>
+      <p>{dayName?.toLocaleString('fr-FR', {  weekday: 'long' })} {dayName?.toLocaleString('fr-FR', {  day: 'numeric' })} {dayName?.toLocaleString('fr-FR', {  month: 'long' })} </p>
       <div className="TextEditorContainer">
-      <div className="TextEditor TypingText">
-      <Editor editorState={message} readOnly={true} />
+      <div className="TextEditor DailyEditor">
+      <Editor editorState={message} customStyleMap={ColorStyleMap}
+ readOnly={true} />
 
       </div>
       <div className="UpdateButtons" style={{display:"flex",flexDirection:"row", alignItems:"center"}}>
