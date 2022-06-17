@@ -37,12 +37,12 @@
 .Toggles button {
   color: rgb(87, 11, 11);
 }
-.SaveButton {
+.EditorButton {
   padding: 5px;
   margin: 10px;
   width: 150px;
   background-color: rgb(252, 249, 242);
   border: 3px solid var(--border-color);
   border-radius: 5px;
-
+font-size: inherit;
 }

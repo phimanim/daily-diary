@@ -4,8 +4,8 @@ import { Auth } from "../pages";
 import { PrivateRoute, GuestRoute } from ".";
 import TextEditor from "../components/Text/TextEditor";
 import { Profile } from "../pages";
-import { Dailys } from "../pages/DailyPages";
-
+import { Dailys, Daily, DailyUpdate } from "../pages/DailyPages";
+import RichEditor from "../components/Text/RichEditor";
 function AppRouter() {
   return (
     <Switch>
@@ -15,17 +15,23 @@ function AppRouter() {
       <GuestRoute path="/signup" exact>
         <Auth />
       </GuestRoute>
-      
+
       <PrivateRoute path="/profile" exact>
-        <Profile/>
+        <Profile />
       </PrivateRoute>
+
       <PrivateRoute path="/new-daily" exact>
-        <TextEditor/>
+        <TextEditor />
+      </PrivateRoute>
+      <PrivateRoute path="/dailys/:dailyId" exact>
+        <Daily />
       </PrivateRoute>
       <PrivateRoute path="/dailys" exact>
-        <Dailys/>
+        <Dailys />
       </PrivateRoute>
-     
+      <PrivateRoute path="/dailys/:dailyId/update" exact>
+        <RichEditor/>
+      </PrivateRoute>
     </Switch>
   );
 }

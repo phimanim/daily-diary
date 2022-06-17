@@ -7,7 +7,7 @@ const ColorControls = (props) => {
     <div>
       {ColorTypes.map((type) => (
         <ColorButton
-          key={type.label}
+          key={type.style}
           active={currentStyle.has(type.style)}
           label={type.label}
           onToggle={props.onToggle}

@@ -1,0 +1,15 @@
+.Dailys {
+    display:grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+justify-items: center;
+}
+
+.DailyDate{
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

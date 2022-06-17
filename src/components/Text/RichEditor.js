@@ -1,26 +1,44 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import {
   Editor,
   EditorState,
   RichUtils,
   Modifier,
   convertToRaw,
+  convertFromRaw,
 } from "draft-js";
-import { createDaily } from "../../api";
 import ColorStyleMap from "./controls/Color/ColorStyleMap";
 import BlockTypeControls from "./controls/Block/BlockTypeControls";
 import InlineStyleControls from "./controls/Inline/InlineStyleControls";
 import ColorControls from "./controls/Color/ColorControls";
 import "./TextEditor.css";
+import { updateDaily, getDailyById } from "../../api";
 
-export default function TextEditor() {
-
+export default function RichEditor() {
   const [editorState, setEditorState] = React.useState(
     EditorState.createEmpty()
   );
   const history = useHistory();
-  
+
+  const { dailyId } = useParams();
+  const [data, setData] = useState(null);
+
+  async function getDailyData() {
+    const { data } = await getDailyById(dailyId);
+    setData(data);
+    console.log(data);
+    const contentState = convertFromRaw(JSON.parse(data.message));
+    const editorState = EditorState.createWithContent(contentState);
+    setEditorState(editorState);
+  }
+
+  useEffect(() => {
+    if (dailyId) {
+      getDailyData();
+    }
+  }, [dailyId]);
+
   const onInlineClick = (e) => {
     let nextState = RichUtils.toggleInlineStyle(editorState, e);
     setEditorState(nextState);
@@ -69,29 +87,11 @@ export default function TextEditor() {
     }
     setEditorState(nextEditorState);
   }
-  const saveContent = (content) => {
-    window.localStorage.setItem(
-      "content",
-      JSON.stringify(convertToRaw(content))
-    );
-  };
 
   const onChange = (editorState) => {
-    const contentState = editorState.getCurrentContent();
-    saveContent(contentState);
     setEditorState(editorState);
+    console.log(editorState)
   };
-
-  // useEffect(() => {
-  //   const content = window.localStorage.getItem("content");
-  //   if (content) {
-  //     setEditorState(
-  //       EditorState.createWithContent(convertFromRaw(JSON.parse(content)))
-  //     );
-  //   } else {
-  //     setEditorState(EditorState.createEmpty());
-  //   }
-  // }, []);
 
   const newHandleSubmit = async (event) => {
     event.preventDefault();
@@ -100,8 +100,8 @@ export default function TextEditor() {
       message: JSON.stringify(contentRaw),
     };
     try {
-      const { data } = await createDaily({
-        ...newDaily,
+      const { data } = await updateDaily(dailyId, {
+        ...newDaily
       });
       history.push("/profile");
     } catch (err) {
@@ -110,8 +110,9 @@ export default function TextEditor() {
   };
 
   return (
-    <div className="TextEditorContainer"
-    >
+    <div className="TextEditorContainer">
+      <p>Update Daily</p>
+
       <div className="Toggles">
         <BlockTypeControls onToggle={onBlockClick} />
         <InlineStyleControls
@@ -127,9 +128,7 @@ export default function TextEditor() {
           onChange={onChange}
         />
       </div>
-      <button className="EditorButton"
-        onClick={newHandleSubmit}
-      >
+      <button className="EditorButton" onClick={newHandleSubmit}>
         Save
       </button>
     </div>
