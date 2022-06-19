@@ -3,9 +3,10 @@ import { Switch } from "react-router-dom";
 import { Auth } from "../pages";
 import { PrivateRoute, GuestRoute } from ".";
 import TextEditor from "../components/Text/TextEditor";
-import { Profile } from "../pages";
 import { Dailys, Daily } from "../pages/DailyPages";
 import RichEditor from "../components/Text/RichEditor";
+import DateRange from "../pages/DateRange";
+
 function AppRouter() {
   return (
     <Switch>
@@ -16,10 +17,10 @@ function AppRouter() {
         <Auth />
       </GuestRoute>
 
-      <PrivateRoute path="/profile" exact>
-        <Profile />
+      <PrivateRoute path="/date-search" exact>
+        <DateRange />
       </PrivateRoute>
-
+      
       <PrivateRoute path="/new-daily" exact>
         <TextEditor />
       </PrivateRoute>
