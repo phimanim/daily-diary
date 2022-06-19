@@ -18,9 +18,14 @@ a {
   color: inherit;
 }
 
-.DailysContainer input {
+.SearchInput {
   width: 150px;
-  padding: 10px;
+  padding: 11px;
+}
+
+.DateInput_input{
+  padding: 11px 0;
+text-align: center; 
 }
 
 .DateRangePickerInput__withBorder{

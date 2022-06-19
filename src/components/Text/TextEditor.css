@@ -12,8 +12,8 @@
 }
 
 .TypingText {
-  width: 600px;
-  height: 600px;
+  width: 70%;
+  height: 500px;
   border-top: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -27,15 +27,15 @@
   border-radius: 10px;
 }
 .DailyEditor {
-  width: 600px;
-  height: 600px;
+  width: 70%;
+  height: 500px;
   border-radius: 10px;
   overflow: scroll;
 }
 .Toggles {
   padding: 10px 20px;
   display: flex;
-  width: 600px;
+  width: 70%;
   background-color: rgb(252, 249, 242);
   border: 3px solid var(--border-color);
   border-top-left-radius: 10px;
@@ -52,4 +52,11 @@
   border: 3px solid var(--border-color);
   border-radius: 5px;
   font-size: inherit;
+  text-align: center; 
+
+}
+.DraftEditor-root{
+  height: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

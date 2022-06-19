@@ -18,6 +18,7 @@ export default function Dailys() {
   const [startDate, setStartDate] = useState(moment().startOf("month"));
   const [endDate, setEndDate] = useState(moment());
   const [focusedInput, setFocusedInput] = useState();
+
   const dateRange = (daily) => {
     let date = new Date(daily.createdAt);
     return date >= startDate && date <= endDate;
@@ -33,16 +34,28 @@ export default function Dailys() {
 
   return (
     <div className="DailysContainer">
-       <h1>All your dailys</h1>
+       <h1 style={{
+         display: "flex",
+justifyContent:"right", padding: "10px", margin:"0"     }}>All your dailys</h1>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "baseline",
-          justifyContent:"space-around"
+          alignItems: "right",
+          justifyContent:"right"
         }}
       >
        
+        
+        <input
+          className="SearchInput"
+          type="text"
+          name="search"
+          id="search"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={handleSearchChange}
+        />
         <DateRangePicker
           numberOfMonths={1}
           startDate={startDate}
@@ -56,15 +69,6 @@ export default function Dailys() {
           focusedInput={focusedInput}
           onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
           isOutsideRange={(day) => moment().diff(day) < 0}
-        />
-        <input
-          className="SearchInput"
-          type="text"
-          name="search"
-          id="search"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={handleSearchChange}
         />
       </div>
 

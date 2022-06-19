@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const Ul = styled.ul`
   display: flex;
-  justify-content: center;
+  justify-content: right;
   padding: 0;
   margin: 0;
 `;
@@ -15,6 +15,20 @@ const Li = styled.li`
 const NavbarLink = styled(Link)`
   color: inherit;
   text-decoration: none;
+  margin: 10px;
+  &:hover,
+  &:focus {
+    color: grey;
+  }
+`;
+
+const Button = styled.button`
+border:0;
+background-color:transparent;
+font-size:inherit;
+cursor :pointer;
+  color: inherit;
+  
   margin: 10px;
   &:hover,
   &:focus {
@@ -35,7 +49,7 @@ export default function Navbar() {
             <Li>
               <NavbarLink to="/dailys">Dailys</NavbarLink>
             </Li>
-            <button style ={{border:"0", backgroundColor:"transparent"}}onClick={handleLogout}>Logout</button>
+            <Button onClick={handleLogout}>Logout</Button>
           </Ul>
           
         </nav>
