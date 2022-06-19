@@ -35,9 +35,6 @@ export default function Navbar() {
             <Li>
               <NavbarLink to="/dailys">Dailys</NavbarLink>
             </Li>
-            <Li>
-              <NavbarLink to="/date-search">Search Date</NavbarLink>
-            </Li>
             <button style ={{border:"0", backgroundColor:"transparent"}}onClick={handleLogout}>Logout</button>
           </Ul>
           

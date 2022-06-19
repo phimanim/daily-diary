@@ -103,7 +103,7 @@ export default function TextEditor() {
       const { data } = await createDaily({
         ...newDaily,
       });
-      history.push("/profile");
+      history.push("/dailys");
     } catch (err) {
       console.log(await err.response);
     }

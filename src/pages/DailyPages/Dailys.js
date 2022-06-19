@@ -3,13 +3,25 @@ import { Editor, EditorState, convertFromRaw } from "draft-js";
 import { getDailys } from "../../api";
 import Suspense from "../../components/Suspense";
 import { useFetch } from "../../hooks/useFetch";
+import { DateRangePicker } from "react-dates";
+import moment from "moment";
 import ColorStyleMap from "../../components/Text/controls/Color/ColorStyleMap";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
 import "../../components/Text/TextEditor.css";
 import "../../assets/stylesheets/Daily.css";
 
 export default function Dailys() {
   const { data, loading, error } = useFetch(getDailys);
 
+  //filter by date
+  const [startDate, setStartDate] = useState(moment().startOf("month"));
+  const [endDate, setEndDate] = useState(moment());
+  const [focusedInput, setFocusedInput] = useState();
+  const dateRange = (daily) => {
+    let date = new Date(daily.createdAt);
+    return date >= startDate && date <= endDate;
+  };
   //filter by term
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -21,20 +33,36 @@ export default function Dailys() {
 
   return (
     <div className="DailysContainer">
+       <h1>All your dailys</h1>
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          flexDirection: "row",
+          alignItems: "baseline",
+          justifyContent:"space-around"
         }}
       >
-        
+       
+        <DateRangePicker
+          numberOfMonths={1}
+          startDate={startDate}
+          startDateId="start-date"
+          endDate={endDate}
+          endDateId="end-date"
+          onDatesChange={({ startDate, endDate }) => {
+            setStartDate(startDate);
+            setEndDate(endDate);
+          }}
+          focusedInput={focusedInput}
+          onFocusChange={(focusedInput) => setFocusedInput(focusedInput)}
+          isOutsideRange={(day) => moment().diff(day) < 0}
+        />
         <input
           className="SearchInput"
           type="text"
           name="search"
           id="search"
-          placeholder="Search"
+          placeholder="Search..."
           value={searchTerm}
           onChange={handleSearchChange}
         />
@@ -44,13 +72,11 @@ export default function Dailys() {
         <Suspense noData={!data && !loading} error={error} loading={loading}>
           {data ? (
             data
+              .filter(dateRange)
               .filter(bySearchTerm)
               .map((el) => {
                 const contentState = convertFromRaw(JSON.parse(el.message));
                 const editorState = EditorState.createWithContent(contentState);
-                // console.log("conso",new Date(el.createdAt))
-                // console.log("conso",(el.createdAt))
-
                 return (
                   <div key={el._id}>
                     <p className="DailyDate">{el.createdAt.slice(0, 10)}</p>

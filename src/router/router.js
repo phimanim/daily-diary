@@ -5,7 +5,6 @@ import { PrivateRoute, GuestRoute } from ".";
 import TextEditor from "../components/Text/TextEditor";
 import { Dailys, Daily } from "../pages/DailyPages";
 import RichEditor from "../components/Text/RichEditor";
-import DateRange from "../pages/DateRange";
 
 function AppRouter() {
   return (
@@ -16,10 +15,6 @@ function AppRouter() {
       <GuestRoute path="/signup" exact>
         <Auth />
       </GuestRoute>
-
-      <PrivateRoute path="/date-search" exact>
-        <DateRange />
-      </PrivateRoute>
       
       <PrivateRoute path="/new-daily" exact>
         <TextEditor />

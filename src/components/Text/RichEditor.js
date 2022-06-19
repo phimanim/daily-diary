@@ -103,7 +103,7 @@ export default function RichEditor() {
       const { data } = await updateDaily(dailyId, {
         ...newDaily
       });
-      history.push("/profile");
+      history.push("/dailys");
     } catch (err) {
       console.log(await err.response);
     }
