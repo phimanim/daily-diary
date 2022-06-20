@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Ul = styled.ul`
   display: flex;
@@ -23,12 +24,12 @@ const NavbarLink = styled(Link)`
 `;
 
 const Button = styled.button`
-border:0;
-background-color:transparent;
-font-size:inherit;
-cursor :pointer;
-  color: inherit;
-  
+  border: 0;
+  background-color: ${({ bg }) => bg};
+  font-size: inherit;
+  cursor: pointer;
+  color: ${({ color }) => color};
+
   margin: 10px;
   &:hover,
   &:focus {
@@ -37,6 +38,7 @@ cursor :pointer;
 `;
 export default function Navbar() {
   const { user, handleLogout } = useAuth();
+  const darkmode = useSelector((state) => state.theme.darkmode);
 
   if (user) {
     return (
@@ -49,9 +51,14 @@ export default function Navbar() {
             <Li>
               <NavbarLink to="/dailys">Dailys</NavbarLink>
             </Li>
-            <Button onClick={handleLogout}>Logout</Button>
+            <Button
+              bg={!darkmode ? "#fff" : "#344144"}
+              color={!darkmode ? "#000" : "#fff"}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
           </Ul>
-          
         </nav>
       </div>
     );

@@ -1,29 +1,42 @@
-import "./App.css";
-import Navbar from "./components/Navbar";
-import useLocalStorage from "use-local-storage";
+import { useDispatch, useSelector, Provider } from "react-redux";
+import store from "./store/store";
+
 import { AppRouter } from "./router";
+import Navbar from "./components/Navbar";
+import { setDarkTheme, setDefaultTheme } from "./store/themeSlice";
+import { ModeButton } from "./assets/stylesheets/styled/Button";
+import { ThemeProvider } from "styled-components";
+import "./App.css";
 
 function App() {
-  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const dispatch = useDispatch();
+  const theme = useSelector((state) => state.theme);
 
-  const [theme, setTheme] = useLocalStorage(
-    "theme",
-    defaultDark ? "dark" : "light"
-  );
-
-  const switchTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
+  const setDark = () => {
+    dispatch(setDarkTheme());
   };
 
+  const setDefault = () => {
+    dispatch(setDefaultTheme());
+  };
   return (
-    <div className="App" data-theme={theme}>
-      <Navbar /> 
-      <div style={{padding: "1em 3em"}} >
-          <AppRouter />
-      </div>
-      <button className="Circle" style={{margin: "1em 3em", textAlign:"right"}} onClick={switchTheme}></button>
-    </div>
+          <ThemeProvider theme={theme}>
+
+        <div className="App" id="darkmode">
+          <Navbar />
+          <div style={{ padding: "1em 3em" }}>
+            <AppRouter />
+          </div>
+        </div>
+        {!theme.darkmode ? (
+          <ModeButton onClick={setDark} bg="#324b50">
+            <img src="./images/night-mode.png" alt="" />
+          </ModeButton>
+        ) : (
+          <ModeButton onClick={setDefault} bg="#FFE9D0">
+            <img src="./images/contrast.png" alt="" />
+          </ModeButton>
+        )}</ThemeProvider>
   );
 }
 
