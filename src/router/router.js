@@ -2,8 +2,8 @@ import { React } from "react";
 import { Switch } from "react-router-dom";
 import { Auth } from "../pages";
 import { PrivateRoute, GuestRoute } from ".";
-import TextEditor from "../components/Text/TextEditor";
 import { Dailys, Daily } from "../pages/DailyPages";
+import TextEditor from "../components/Text/TextEditor";
 import RichEditor from "../components/Text/RichEditor";
 
 function AppRouter() {

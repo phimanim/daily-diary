@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   height:100%;
+  --background-color: hsl(0, 0%, 97%);
+  --text-color: black;
 }
 .Dailys {
   display: grid;
@@ -14,14 +16,10 @@
   font-weight: bold;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .SearchInput {
   width: 150px;
   padding: 11px;
+  margin: 0 2em;
 }
 
 .DateInput_input{

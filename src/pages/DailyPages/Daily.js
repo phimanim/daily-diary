@@ -3,7 +3,8 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import { getDailyById, deleteDaily } from "../../api";
 import { Editor, EditorState, convertFromRaw } from "draft-js";
 import ColorStyleMap from "../../components/Text/controls/Color/ColorStyleMap";
-import "../../components/Text/TextEditor.css";
+import "../../assets/stylesheets/TextEditor.css";
+
 function Daily() {
   const { dailyId } = useParams();
 

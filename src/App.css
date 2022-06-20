@@ -1,28 +1,81 @@
-root {
+html, body{
+    height: 100%;
+  margin: 0;
+}
+#root {
   --background: white;
   --text-primary: black;
-  --text-secondary: royalblue;
-  --accent: purple;
+  --text-secondary: black;
+  --dark-button: blue;
+  --border-color:rgb(172, 172, 172);
+  /* --border-color:blue; */
+  --background-editor:hsl(0, 0%, 97%);
 }
 
 [data-theme="dark"] {
   --background: #2d2d2d;
   --text-primary: white;
-  --text-primary-footer: red;
-  --text-secondary: grey;
-  --accent: darkred;
+  --text-secondary: pink;
+  --dark-button:pink;
+  --border-color:pink;
+  --background-editor:#4b4b4b;
 }
-
+body {
+    background-color: var(--background);
+}
 .App {
+    min-height: 100vh;
+
   color: var(--text-primary);
   background-color: var(--background);
 }
 
-.AppRouter{
-    margin: 1em;
+.App .TextEditor,
+.Toggles, .EditorButton, button{
+  color: var(--text-primary);
+  background-color: var(--background-editor);
+  border: 3px solid var(--border-color);
+}
+.App .DailysContainer {
+  color: var(--text-primary);
+}
+
+.ReadOnly{
+border: 2px solid var(--border-color);
+}
+.AppRouter {
+  margin: 1em;
   padding: 0;
 }
 Link {
+  text-decoration: none;
+}
+.Toggles {
+    border-bottom: none;
+}
+.DarkButton{
+    padding: 15px;
+  border-radius: 50%;
+  border: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  width: 30px;
+  height: 30px;
+    background: var(--dark-button);
+}
+.Footer a {
+    color: var(--dark-button)
+}
+
+button, a {
+    color: inherit;
     text-decoration: none;
   }
-  
+
+  h1, p {
+    color: var(--text-secondary)
+  }
+

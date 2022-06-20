@@ -8,7 +8,7 @@ import moment from "moment";
 import ColorStyleMap from "../../components/Text/controls/Color/ColorStyleMap";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
-import "../../components/Text/TextEditor.css";
+import "../../assets/stylesheets/TextEditor.css";
 import "../../assets/stylesheets/Daily.css";
 
 export default function Dailys() {

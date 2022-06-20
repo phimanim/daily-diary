@@ -12,7 +12,7 @@ import ColorStyleMap from "./controls/Color/ColorStyleMap";
 import BlockTypeControls from "./controls/Block/BlockTypeControls";
 import InlineStyleControls from "./controls/Inline/InlineStyleControls";
 import ColorControls from "./controls/Color/ColorControls";
-import "./TextEditor.css";
+import "../../assets/stylesheets/TextEditor.css";
 import { updateDaily, getDailyById } from "../../api";
 
 export default function RichEditor() {
