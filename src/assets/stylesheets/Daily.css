@@ -1,6 +1,7 @@
 .DailysContainer {
   display: flex;
   flex-direction: column;
+  height:100%;
 }
 .Dailys {
   display: grid;

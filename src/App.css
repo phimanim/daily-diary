@@ -1,8 +1,28 @@
-body {
-    margin: 1em;
-    padding: 0;
+root {
+  --background: white;
+  --text-primary: black;
+  --text-secondary: royalblue;
+  --accent: purple;
 }
 
-Link {
-text-decoration: none;
+[data-theme="dark"] {
+  --background: #2d2d2d;
+  --text-primary: white;
+  --text-primary-footer: red;
+  --text-secondary: grey;
+  --accent: darkred;
 }
+
+.App {
+  color: var(--text-primary);
+  background-color: var(--background);
+}
+
+.AppRouter{
+    margin: 1em;
+  padding: 0;
+}
+Link {
+    text-decoration: none;
+  }
+  
